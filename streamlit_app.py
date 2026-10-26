@@ -14,7 +14,7 @@ people=profiles()
 pages=['Start here','Part 1 · Intake & strategy','Part 2 · Talent sourcing','Part 3 · Structured assessment','Part 4 · Pipeline & candidate care','Part 5 · Closing & first 90 days']
 with st.sidebar:
     st.markdown(f'<div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:0 0 18px"><img src="{LOGO_URI}" alt="SkynetAI-Labs logo" width="180" height="180"></div>',unsafe_allow_html=True)
-    st.caption('Case study for GitLab™’s GTM Recruiter role')
+    st.caption('Case study for the GitLab™ GTM Recruiter role')
     st.caption('By Adam Baig · SkynetAI-Labs')
     page=st.radio('Case study',pages)
     st.divider()
@@ -22,10 +22,9 @@ with st.sidebar:
     st.link_button('Adam Baig · LinkedIn','https://www.linkedin.com/in/adambaiguk')
     st.caption('Scenario date · 26 October 2026')
 st.markdown(f'<div style="display:flex;align-items:center;gap:18px;margin-bottom:22px"><img src="{LOGO_URI}" alt="SkynetAI-Labs logo" width="96" height="96"><div><div style="font-size:27px;font-weight:800;letter-spacing:2px">SKYNETAI-LABS</div><div class="eyebrow">RECRUITING INTELLIGENCE</div></div></div>',unsafe_allow_html=True)
-st.markdown('**Case study for GitLab™’s GTM Recruiter role**')
+st.markdown('**Case study for the GitLab™ GTM Recruiter role**')
 st.title(page)
 if page==pages[0]:
-    st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
     st.markdown('<p class="lead">From a clear hiring brief to a well-informed acceptance.</p>',unsafe_allow_html=True)
     st.write('**By Adam Baig** · 20+ years in recruitment, applied to GitLab’s GTM Recruiter role.')
     st.caption('Independent, AI-assisted portfolio demonstration. Candidate records, search briefs, pay examples and pipeline outcomes are fictional.')
