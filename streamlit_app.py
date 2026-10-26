@@ -1,8 +1,11 @@
 from datetime import date
+import base64
 import pandas as pd
 import altair as alt
 import streamlit as st
 from core import ROLES,AS_OF,STAGES,profiles,seed_pipeline,metrics,move,ote,priorities
+LOGO_SVG='<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"><title>SkynetAI-Labs logo</title><path d="M48 5 85 26v44L48 91 11 70V26Z" fill="#221e38" stroke="#a78bfa" stroke-width="2.5"/><path d="M64 29H37l-8 9 8 10h22l8 10-8 9H32" fill="none" stroke="#fc9c73" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M48 7v12M85 48H74M22 48H11M48 77v12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="48" cy="7" r="4" fill="#a78bfa"/><circle cx="85" cy="48" r="4" fill="#a78bfa"/><circle cx="11" cy="48" r="4" fill="#a78bfa"/><circle cx="48" cy="89" r="4" fill="#a78bfa"/></svg>'
+LOGO_URI='data:image/svg+xml;base64,'+base64.b64encode(LOGO_SVG.encode()).decode()
 st.set_page_config(page_title='GTM Recruiting Case Study | SkynetAI-Labs',page_icon='◆',layout='wide')
 st.markdown('''<style>.block-container{max-width:1420px;padding-top:3.5rem}h1{letter-spacing:-1.3px}h2{letter-spacing:-.5px}[data-testid="stMetric"]{background:#221e38;border:1px solid #494064;padding:16px;border-radius:14px}.eyebrow{letter-spacing:3px;font-size:12px;color:#fca779;font-weight:700}.lead{font-size:20px;color:#d1c9e8}section[data-testid="stSidebar"]{border-right:1px solid #494064}#MainMenu,footer,[data-testid="stAppDeployButton"]{display:none!important}</style>''',unsafe_allow_html=True)
 if 'pipeline' not in st.session_state:st.session_state.pipeline=seed_pipeline()
@@ -11,7 +14,7 @@ report=metrics(rows)
 people=profiles()
 pages=['Start here','Part 1 · Intake & strategy','Part 2 · Talent sourcing','Part 3 · Structured assessment','Part 4 · Pipeline & candidate care','Part 5 · Closing & first 90 days']
 with st.sidebar:
-    st.markdown('<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px"><span style="display:grid;place-items:center;width:42px;height:42px;border:1px solid #fc9c73;border-radius:12px;color:#fc9c73;font-weight:800">S</span><span style="font-size:20px;font-weight:750;letter-spacing:1px">SKYNETAI-LABS</span></div>',unsafe_allow_html=True)
+    st.markdown(f'<div style="display:flex;align-items:center;gap:12px;margin:8px 0 20px"><img src="{LOGO_URI}" alt="SkynetAI-Labs logo" width="58" height="58"><span style="font-size:18px;font-weight:750;letter-spacing:1px">SKYNETAI-LABS</span></div>',unsafe_allow_html=True)
     st.caption('Case study for GitLab™’s GTM Recruiter role')
     st.caption('By Adam Baig · SkynetAI-Labs')
     page=st.radio('Case study',pages)
@@ -19,7 +22,7 @@ with st.sidebar:
     st.caption(f'{report["Open"]} open of 5 hypothetical searches · 40 mapped prospects')
     st.link_button('Adam Baig · LinkedIn','https://www.linkedin.com/in/adambaiguk')
     st.caption('Scenario date · 26 October 2026')
-st.markdown('<div class="eyebrow">SKYNETAI-LABS / RECRUITING INTELLIGENCE</div>',unsafe_allow_html=True)
+st.markdown(f'<div style="display:flex;align-items:center;gap:18px;margin-bottom:22px"><img src="{LOGO_URI}" alt="SkynetAI-Labs logo" width="78" height="78"><div><div style="font-size:27px;font-weight:800;letter-spacing:2px">SKYNETAI-LABS</div><div class="eyebrow">RECRUITING INTELLIGENCE</div></div></div>',unsafe_allow_html=True)
 st.markdown('**Case study for GitLab™’s GTM Recruiter role**')
 st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
 st.title(page)
