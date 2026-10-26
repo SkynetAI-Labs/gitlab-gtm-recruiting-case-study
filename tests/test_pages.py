@@ -1,4 +1,5 @@
 from pathlib import Path
+from core import ROLES
 from streamlit.testing.v1 import AppTest
 app=Path(__file__).resolve().parents[1]/'streamlit_app.py'
 
@@ -13,6 +14,9 @@ def test_all_pages_and_role_kits_render():
             for role in at.selectbox[0].options:
                 at.selectbox[0].set_value(role).run()
                 assert not at.exception
+                if 'Structured' in p:
+                    visible=' '.join(x.value for x in at.markdown)
+                    assert all(q in visible for q in ROLES[role]['questions'])
     at.sidebar.radio[0].set_value(pages[2]).run()
     at.text_input[0].set_value('no matching background').run()
     assert not at.exception
