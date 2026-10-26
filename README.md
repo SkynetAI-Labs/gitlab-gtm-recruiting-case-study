@@ -4,6 +4,8 @@ By Adam Baig. A five-part case study for GitLab™’s Recruiter, GTM role.
 
 GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.
 
+**[Open the live case study](https://skynetai-recruiting-case-study.streamlit.app/)**
+
 ## Explore
 - Intake and strategy: five role briefs and interviewer responsibilities.
 - Talent sourcing: 40 fictional profiles and balanced channels.
@@ -20,7 +22,7 @@ python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python -m streamlit run streamlit_app.py --server.port 8502
 ```
-Open http://127.0.0.1:8502/ on the same computer. A public link has not been deployed for this project.
+Open http://127.0.0.1:8502/ on the same computer for local use.
 
 Run checks with `python -m pytest -q`.
 
