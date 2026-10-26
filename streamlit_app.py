@@ -3,7 +3,7 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 from core import ROLES,AS_OF,STAGES,profiles,seed_pipeline,metrics,move,ote,priorities
-st.set_page_config(page_title='GitLab GTM Recruiting | Adam Baig',page_icon='◆',layout='wide')
+st.set_page_config(page_title='GTM Recruiting Case Study | SkynetAI-Labs',page_icon='◆',layout='wide')
 st.markdown('''<style>.block-container{max-width:1420px;padding-top:3.5rem}h1{letter-spacing:-1.3px}h2{letter-spacing:-.5px}[data-testid="stMetric"]{background:#221e38;border:1px solid #494064;padding:16px;border-radius:14px}.eyebrow{letter-spacing:3px;font-size:12px;color:#fca779;font-weight:700}.lead{font-size:20px;color:#d1c9e8}section[data-testid="stSidebar"]{border-right:1px solid #494064}#MainMenu,footer,[data-testid="stAppDeployButton"]{display:none!important}</style>''',unsafe_allow_html=True)
 if 'pipeline' not in st.session_state:st.session_state.pipeline=seed_pipeline()
 rows=st.session_state.pipeline
@@ -11,15 +11,17 @@ report=metrics(rows)
 people=profiles()
 pages=['Start here','Part 1 · Intake & strategy','Part 2 · Talent sourcing','Part 3 · Structured assessment','Part 4 · Pipeline & candidate care','Part 5 · Closing & first 90 days']
 with st.sidebar:
-    st.markdown('### SKYNETAI-LABS')
-    st.caption('Case study for GitLab’s GTM Recruiter role')
+    st.markdown('<div style="display:flex;align-items:center;gap:12px;margin:12px 0 20px"><span style="display:grid;place-items:center;width:42px;height:42px;border:1px solid #fc9c73;border-radius:12px;color:#fc9c73;font-weight:800">S</span><span style="font-size:20px;font-weight:750;letter-spacing:1px">SKYNETAI-LABS</span></div>',unsafe_allow_html=True)
+    st.caption('Case study for GitLab™’s GTM Recruiter role')
     st.caption('By Adam Baig · SkynetAI-Labs')
     page=st.radio('Case study',pages)
     st.divider()
     st.caption(f'{report["Open"]} open of 5 hypothetical searches · 40 mapped prospects')
     st.link_button('Adam Baig · LinkedIn','https://www.linkedin.com/in/adambaiguk')
     st.caption('Scenario date · 26 October 2026')
-st.markdown('<div class="eyebrow">CASE STUDY FOR GITLAB’S GTM RECRUITER ROLE / ADAM BAIG</div>',unsafe_allow_html=True)
+st.markdown('<div class="eyebrow">SKYNETAI-LABS / RECRUITING INTELLIGENCE</div>',unsafe_allow_html=True)
+st.markdown('**Case study for GitLab™’s GTM Recruiter role**')
+st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
 st.title(page)
 if page==pages[0]:
     st.markdown('<p class="lead">From a clear hiring brief to a well-informed acceptance.</p>',unsafe_allow_html=True)

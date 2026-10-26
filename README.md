@@ -1,6 +1,8 @@
-# GitLab GTM Recruiting — Adam Baig
+# SkynetAI-Labs · GTM Recruiting Case Study
 
-A separate five-part recruitment case study tailored to GitLab’s Recruiter, GTM vacancy.
+By Adam Baig. A five-part case study for GitLab™’s Recruiter, GTM role.
+
+GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.
 
 ## Explore
 - Intake and strategy: five role briefs and interviewer responsibilities.
