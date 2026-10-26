@@ -23,11 +23,11 @@ with st.sidebar:
     st.caption('Scenario date · 26 October 2026')
 st.markdown(f'<div style="display:flex;align-items:center;gap:18px;margin-bottom:22px"><img src="{LOGO_URI}" alt="SkynetAI-Labs logo" width="96" height="96"><div><div style="font-size:27px;font-weight:800;letter-spacing:2px">SKYNETAI-LABS</div><div class="eyebrow">RECRUITING INTELLIGENCE</div></div></div>',unsafe_allow_html=True)
 st.markdown('**Case study for GitLab™’s GTM Recruiter role**')
-st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
 st.title(page)
 if page==pages[0]:
+    st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
     st.markdown('<p class="lead">From a clear hiring brief to a well-informed acceptance.</p>',unsafe_allow_html=True)
-    st.write('**By Adam Baig** · 20+ years in recruitment, applied to GitLab’s GTM Recruiter challenge.')
+    st.write('**By Adam Baig** · 20+ years in recruitment, applied to GitLab’s GTM Recruiter role.')
     st.caption('Independent, AI-assisted portfolio demonstration. Candidate records, search briefs, pay examples and pipeline outcomes are fictional.')
     a,b=st.columns(2)
     with a:
@@ -60,7 +60,7 @@ elif page==pages[2]:
     role=a.selectbox('Role family',['All roles']+list(ROLES));channel=b.selectbox('Route to talent',['All channels']+sorted({x['channel'] for x in people}));query=c.text_input('Search background or region',placeholder='e.g. security or DACH')
     selected=[x for x in people if (role=='All roles' or x['role']==role) and (channel=='All channels' or x['channel']==channel) and query.casefold() in (x['background']+' '+x['region']).casefold()]
     st.metric('Mapped prospects in view',len(selected))
-    st.dataframe(pd.DataFrame(selected,columns=['id','role','background','region','channel']),hide_index=True,width='stretch')
+    st.dataframe(pd.DataFrame(selected,columns=['id','role','background','region','channel']).rename(columns={'id':'Candidate ID','role':'Role','background':'Background','region':'Region','channel':'Sourcing channel'}),hide_index=True,width='stretch')
     st.subheader('A balanced sourcing plan')
     st.dataframe(pd.DataFrame([{'Route':'Applicants','Recruiter action':'Review competencies; separate essential evidence from employer pedigree.'},{'Route':'Targeted outreach','Recruiter action':'Compare direct developer-tool talent with cloud, security and adjacent B2B experience.'},{'Route':'Referrals','Recruiter action':'Apply the same standards; avoid allowing one network to dominate the shortlist.'},{'Route':'Internal mobility','Recruiter action':'Explore transferable skills and readiness through the appropriate process.'},{'Route':'Talent community','Recruiter action':'Re-engage with appropriate permission, relevant context and a clear proposition.'}]),hide_index=True,width='stretch')
     with st.expander('Market hypotheses and inclusion in practice'):
@@ -103,15 +103,16 @@ elif page==pages[4]:
         st.caption(f"Cumulative stages · {report['Accepted']} accepted · {report['Declined']} declined · {report['Pending']} pending. Mapped prospects are distinct from applications.")
         overdue=priorities(rows)
         st.subheader('Actions requiring attention')
-        if overdue:st.dataframe(pd.DataFrame([{k:x[k] for k in ['id','role','stage','days_in_stage','owner','due','action']} for x in overdue]),hide_index=True,width='stretch')
+        if overdue:st.dataframe(pd.DataFrame([{k:x[k] for k in ['id','candidate','role','stage','days_in_stage','owner','due','action']} for x in overdue]).rename(columns={'id':'Application ID','candidate':'Candidate ID','role':'Role','stage':'Stage','days_in_stage':'Days in stage','owner':'Owner','due':'Due','action':'Next action'}),hide_index=True,width='stretch')
         else:st.success('No overdue open actions in this session.')
         st.write('**My intervention:** request missing competency feedback with an owner and due date; tell the candidate when they will next hear from us. Escalate a recurring delay rather than leaving candidates in an unexplained holding pattern.')
         st.subheader('Asynchronous hiring-manager update')
         st.write(f"**26 October:** {report['Open']} searches remain open; {report['Pending']} offers await decisions. {len(overdue)} open actions are overdue. **Decision needed:** resolve missing feedback before adding interviews. **Owner:** hiring manager for assessment; recruiter for candidate communication. **Next review:** 28 October.")
     with workbench:
-        st.dataframe(pd.DataFrame([{k:x[k] for k in ['id','candidate','role','source','stage','owner','due']} for x in rows]),hide_index=True,width='stretch')
+        st.dataframe(pd.DataFrame([{k:x[k] for k in ['id','candidate','role','source','stage','owner','due']} for x in rows]).rename(columns={'id':'Application ID','candidate':'Candidate ID','role':'Role','source':'Sourcing channel','stage':'Stage','owner':'Owner','due':'Due'}),hide_index=True,width='stretch')
         aid=st.selectbox('Application to review',[x['id'] for x in rows],index=16);current=next(x for x in rows if x['id']==aid)
-        st.write(f"**{current['candidate']} · {current['role']} · {current['stage']}**")
+        st.write(f"**Application {current['id']} · Candidate {current['candidate']}**")
+        st.write(f"{current['role']} · {current['stage']}")
         with st.form('review'):
             choices=STAGES+['Declined','Withdrawn','Rejected']
             target=st.selectbox('Record stage',choices,index=choices.index(current['stage']))
@@ -121,7 +122,7 @@ elif page==pages[4]:
         if saved:
             try:st.session_state.pipeline=move(rows,aid,target,note,owner,due,action);st.rerun()
             except ValueError as e:st.error(str(e))
-        if current['history']:st.dataframe(pd.DataFrame(current['history']),hide_index=True,width='stretch')
+        if current['history']:st.dataframe(pd.DataFrame(current['history']).rename(columns={'from':'Previous stage','to':'Recorded stage','evidence':'Evidence','date':'Review date'}),hide_index=True,width='stretch')
         st.caption('Changes stay in your visitor session. This is an ATS-style example, with no Greenhouse connection.')
         st.download_button('Download application notes',data=pd.DataFrame([{k:x[k] for k in ['id','candidate','role','source','stage','owner','due','action','note']} for x in rows]).to_csv(index=False),file_name='fictional-application-notes.csv')
 else:
@@ -148,3 +149,5 @@ else:
 st.divider()
 st.caption('Independent case study · Fictional data and simulated results · Human decisions throughout · No GitLab affiliation or endorsement')
 
+
+st.caption('GITLAB is a trademark of GitLab Inc. in the United States and other countries and regions.')
